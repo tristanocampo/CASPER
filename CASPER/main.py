@@ -1,6 +1,6 @@
-from flask import Flask, request, render_template, jsonify
+from flask import Flask, request, render_template
 from Lexer import Lexer
-from Parser import build_parser
+from Parser import parse  # Importing from the updated Parser.py
 
 app = Flask(__name__)
 
@@ -21,24 +21,14 @@ def home():
             lexer = Lexer(source=code)
             while lexer.current_char is not None:
                 token = lexer.next_token()
-                token_type = str(token.type).split(".")[-1]
-
+                token_type = token.type.name
                 if token_type == "ILLEGAL":
                     illegal_tokens.append(str(token))
                 else:
                     lexer_results.append((token.literal, token_type))
 
         if PARSER_DEBUG and not illegal_tokens:
-            parser = build_parser()
-            try:
-                ast = parser.parse(lexer=Lexer(code))
-                # parser_output = str(ast)
-                parser_output = "No Syntax Error"
-            except SyntaxError as e:
-                parser_output = str(e)  
-            except Exception as e:
-                parser_output = f"Unexpected Error: {str(e)}"
-
+            parser_output = parse(code)  # Using the updated parse function
 
     return render_template(
         "index.html",

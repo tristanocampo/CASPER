@@ -773,10 +773,10 @@ class Lexer:
             # If it's a comment or an ILLEGAL token, just skip it
             if tok.type == TokenType.COMMENT or tok.type == TokenType.ILLEGAL:
                 continue
-
+            
             # Otherwise, it's a valid token for the parser
-            tok.type = tok.type.name  # PLY requires token type as a string
-            tok.value = tok.literal
-            tok.lineno = tok.line_no
+            tok.type = tok.type.name  # PLY requires token type as a string ->  # Convert Enum to string
+            tok.value = tok.literal # Store actual value for parser
+            tok.lineno = tok.line_no  # Assign correct line number
             return tok
 
