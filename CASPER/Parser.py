@@ -37,7 +37,7 @@ class LarkLexer(LarkLexerBase):
 
 grammar = """
     // Program structure
-    program: BIRTH NEWLINE* global_dec NEWLINE* function_statements NEWLINE* MAIN_CASPER LPAREN RPAREN LBRACE NEWLINE* statements NEWLINE* RBRACE  NEWLINE GHOST
+    program: BIRTH NEWLINE* global_dec NEWLINE* function_statements NEWLINE* MAIN_CASPER LPAREN RPAREN LBRACE NEWLINE* statements NEWLINE* RBRACE NEWLINE NEWLINE* GHOST
 
     // Literals
     literal: INT_LIT | FLT_LIT | BLN_LIT | CHR_LIT | STR_LIT
